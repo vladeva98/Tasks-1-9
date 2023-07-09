@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>JavaScript Animation</title>
+    <html>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+    </head>
+
+<body>
+    <div id="box"></div>
+    <button id="startStopBtn">Start/Stop</button>
+</body>
+
+<style>
+    #box {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    #startStopBtn{
+        width: 100px;
+        height: 50px;
+        margin-top: 20px;
+        margin-left: 700px;
+
+
+    }
+</style>
+<script>
+    var box = document.getElementById('box');
+var position = 0;
+var interval;
+
+function animateObject() {
+  interval = setInterval(frame, 10); 
+}
+
+function frame() {
+  if (position >= window.innerWidth - 50) {
+    clearInterval(interval);
+  } else {
+    position++;
+    box.style.left = position + 'px';
+  }
+}
+
+function toggleAnimation() {
+  if (interval) {
+    clearInterval(interval);
+    interval = null;
+  } else {
+    animateObject();
+  }
+}
+
+var startStopBtn = document.getElementById('startStopBtn');
+startStopBtn.addEventListener('click', toggleAnimation);
+
+animateObject();
+</script>
+</head>
+
+<body>
+
+    <div id="container"></div>
+</body>
+
+</html>

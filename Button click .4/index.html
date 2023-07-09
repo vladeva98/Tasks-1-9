@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Button Click Event</title>
+</head>
+
+<body>
+    <button id="myButton">Click Me</button>
+
+    <script>
+        var myButton = document.getElementById('myButton');
+
+        function handleButtonClick() {
+            alert('Button clicked!');
+        }
+
+        myButton.addEventListener('click', handleButtonClick);
+    </script>
+</body>
+
+</html>

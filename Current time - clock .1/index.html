@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current time - clock</title>
+    <script>
+        function displayTime() {
+            var clockElement = document.getElementById("clock");
+            var currentTime = new Date();
+            var hours = currentTime.getHours();
+            var minutes = currentTime.getMinutes();
+            var seconds = currentTime.getSeconds();
+            // Format the time as HH:MM:SS
+            var formattedTime = hours + ":" + minutes + ":" + seconds;
+            // Update the clock element with the current time
+            clockElement.textContent = formattedTime;
+        }
+        // Call displayTime function every second
+        setInterval(displayTime, 1000);
+    </script>
+</head>
+
+<body>
+
+    <div id="clock"></div>
+
+</body>
+
+</html>

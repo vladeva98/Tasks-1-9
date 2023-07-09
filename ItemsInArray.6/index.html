@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Pagination Example</title>
+    <style>
+        .pagination {
+            display: flex;
+            list-style-type: none;
+            padding: 0;
+            justify-content: center;
+        }
+
+        .pagination li {
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .pagination li.active {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>List of items</h1>
+    <div id="items-container"></div>
+    <ul class="pagination" id="pagination">
+        <li id="prev-button">Previous</li>
+        <li id="next-button">Next</li>
+    </ul>
+
+    <script>
+        // Simulated array of items
+        const items = [
+            'I 1',
+            'I 2',
+            'I 3',
+            'I 4',
+            'I 5',
+            'I 6',
+            'I 7',
+            'I 8',
+            'I 9',
+            'I 10',
+            'I 11',
+            'I 12'
+        ];
+
+        const itemsPerPage = 3; 
+        let currentPage = 1;
+
+        function displayItems(page) {
+            const container = document.getElementById('items-container');
+            container.innerHTML = '';
+
+            const startIndex = (page - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const displayedItems = items.slice(startIndex, endIndex);
+
+            for (const item of displayedItems) {
+                const listItem = document.createElement('div');
+                listItem.textContent = item;
+                container.appendChild(listItem);
+            }
+        }
+
+        function createPaginationButtons() {
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+
+            const totalPages = Math.ceil(items.length / itemsPerPage);
+
+            for (let i = 1; i <= totalPages; i++) {
+                const li = document.createElement('li');
+                li.textContent = i;
+
+                if (i === currentPage) {
+                    li.classList.add('active');
+                }
+
+                li.addEventListener('click', function () {
+                    currentPage = i;
+                    displayItems(currentPage);
+                    createPaginationButtons();
+                });
+
+                pagination.insertBefore(li, document.getElementById('next-button'));
+            }
+        }
+
+        document.getElementById('prev-button').addEventListener('click', function () {
+            if (currentPage > 1) {
+                currentPage--;
+                displayItems(currentPage);
+                createPaginationButtons();
+            }
+        });
+
+        document.getElementById('next-button').addEventListener('click', function () {
+            const totalPages = Math.ceil(items.length / itemsPerPage);
+            if (currentPage < totalPages) {
+                currentPage++;
+                displayItems(currentPage);
+                createPaginationButtons();
+            }
+        });
+
+        displayItems(currentPage);
+        createPaginationButtons();
+    </script>
+</body>
+
+</html>

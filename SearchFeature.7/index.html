@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Search Example</title>
+</head>
+
+<body>
+    <h1>Search Example</h1>
+    <input type="text" id="search-input" placeholder="Search..." />
+    <ul id="results-container"></ul>
+
+    <script>
+        // Sample array of objects
+        const items = [
+            { id: 1, name: 'Apple' , category:"Fryit" },
+            { id: 2, name: 'Banana', category:"Fryit"},
+            { id: 3, name: 'Orange' ,category:"Fryit"},
+            { id: 4, name: 'Grapes' ,category:"Fryit"},
+            { id: 5, name: 'Mango' ,category:"Fryit"},
+            { id: 6, name: 'Pineapple' ,category:"Fryit"},
+        ];
+
+        function displayResults(results) {
+            const container = document.getElementById('results-container');
+            container.innerHTML = '';
+
+            if (results.length === 0) {
+                const listItem = document.createElement('li');
+                listItem.textContent = 'No results found.';
+                container.appendChild(listItem);
+            } else {
+                for (const item of results) {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = item.name;
+                    container.appendChild(listItem);
+                }
+            }
+        }
+
+        function searchItems(query) {
+            const results = items.filter(item => {
+                const itemName = item.name.toLowerCase();
+                const searchQuery = query.toLowerCase();
+                return itemName.includes(searchQuery);
+            });
+
+            displayResults(results);
+        }
+
+        document.getElementById('search-input').addEventListener('input', function (event) {
+            const query = event.target.value;
+            searchItems(query);
+        });
+    </script>
+</body>
+
+</html>

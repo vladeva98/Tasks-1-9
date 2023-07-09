@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Form Submission</title>
+    <style>
+        .success-message {
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="myForm">
+        <input type="text" id="nameInput" placeholder="Enter your name">
+        <input type="text" id="emailInput" placeholder="Enter your email">
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="successMessage" class="success-message" style="display: none;">
+        Form submitted successfully!
+    </div>
+
+    <script>
+        var form = document.getElementById('myForm');
+        var nameInput = document.getElementById('nameInput');
+        var emailInput = document.getElementById('emailInput');
+        var successMessage = document.getElementById('successMessage');
+        var formData = [];
+
+        form.addEventListener('submit', function handleFormSubmission (event) {
+            event.preventDefault(); // Prevent form submission
+
+            var name = nameInput.value.trim();
+            var email = emailInput.value.trim();
+
+            if (name !== '' && email !== '') {
+                var data = { name: name, email: email };
+                formData.push(data);
+                console.log(formData);
+                form.reset();
+
+                successMessage.style.display = 'block';
+                setTimeout(function () {
+                    successMessage.style.display = 'none';
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+
+</html>
